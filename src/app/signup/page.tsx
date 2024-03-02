@@ -1,51 +1,47 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-
+import React, { useEffect } from "react";
+import {useRouter} from "next/navigation";
 import axios from "axios";
-import {useRouter} from "next/navigation"
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 
 
 
+export default function SignupPage() {
+    const router = useRouter();
+    const [user, setUser] = React.useState({
+        email: "",
+        username: "",
+        password: "",
+        
+    })
+    const [buttonDisabled, setButtonDisabled] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
 
-
-const page = () => {
-  const router = useRouter();
-
-   const [user,setUser] = useState(
-    {
-      email: "",
-      username: "",
-      password: "", 
+    const onSignup = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.post("/api/users/signup", user);
+            console.log("Signup success", response.data);
+            router.push("/login");
+            
+        } catch (error:any) {
+            console.log("Signup failed", error.message);
+            
+            toast.error(error.message);
+        }finally {
+            setLoading(false);
+        }
     }
-   )
-   const [buttonDisabled,setButtonDisabled] = useState(false);
 
-   const [loading,setLoading] = useState(false);
-
-   useEffect(()=>{
-    if(user.email.length>0 && user.password.length>0 && user.username.length>0){
-      setButtonDisabled(false);
-    }else{
-      setButtonDisabled(true)
-    }
-   },[user])
-  
-  const onSignUp = async()=>{
-    try{
-      setLoading(true);
-    const response =  await  axios.post("/api/users/signup",user);
-    console.log("signUp success",response.data);
-    router.push("/login")
-    }catch(err:any){
-      console.log("signup error",err.message)
-      toast.error(err.message)
-    }finally{
-      setLoading(false);
-    }
-  }
+    useEffect(() => {
+        if(user.email.length > 0 && user.password.length > 0 && user.username.length > 0) {
+            setButtonDisabled(false);
+        } else {
+            setButtonDisabled(true);
+        }
+    }, [user]);
   return (
       <div className="border-2 shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]  top-[1rem]  rounded-lg relative md:top-[3rem] md:mt-1 md:w-[40rem] md:h-[30rem]  md:left-[20rem] w-[28rem] h-[30rem]">
       <div className="text-2xl font-medium mb-20 text-center mt-20">
@@ -72,7 +68,7 @@ const page = () => {
       value={user.password}
       onChange={(e)=>setUser({...user,password:e.target.value})}
       />
-      <button className="rounded-lg bg-blue-500 hover:bg-blue-700 duration-200" onClick={onSignUp}>{buttonDisabled ?"No signUp":"Sign Up"}</button>
+      <button className="rounded-lg bg-blue-500 hover:bg-blue-700 duration-200" onClick={onSignup}>{buttonDisabled ?"No signUp":"Sign Up"}</button>
       <h1 className="text-lg">Have an Account?</h1><Link href="/login" className="text-lg underline text-blue-500" >Login Here</Link>
       </div>
       
@@ -83,4 +79,3 @@ const page = () => {
   )
 }
 
-export default page

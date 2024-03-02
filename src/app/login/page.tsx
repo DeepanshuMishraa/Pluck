@@ -2,22 +2,23 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, {useEffect} from "react";
 import toast from "react-hot-toast";
 
 
 const page = () => {
 
   const router = useRouter();
-  const [buttonDisabled,setButtonDisabled] = useState(false);
-  const [loading,setLoading] = useState(false);
+  const [buttonDisabled,setButtonDisabled] = React.useState(false)
+  const [loading,setLoading] = React.useState(false)
 
 
 
-  const [user,setUser] = useState({
+  const [user,setUser] = React.useState({
     username: "",
-    password : "",
-  });
+    password: "",
+   
+})
 
   const onLogin = async()=>{
     try{
