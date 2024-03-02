@@ -1,0 +1,86 @@
+"use client";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+import axios from "axios";
+import {useRouter} from "next/navigation"
+import toast from "react-hot-toast";
+
+
+
+
+
+
+const page = () => {
+  const router = useRouter();
+
+   const [user,setUser] = useState(
+    {
+      email: "",
+      username: "",
+      password: "", 
+    }
+   )
+   const [buttonDisabled,setButtonDisabled] = useState(false);
+
+   const [loading,setLoading] = useState(false);
+
+   useEffect(()=>{
+    if(user.email.length>0 && user.password.length>0 && user.username.length>0){
+      setButtonDisabled(false);
+    }else{
+      setButtonDisabled(true)
+    }
+   },[user])
+  
+  const onSignUp = async()=>{
+    try{
+      setLoading(true);
+    const response =  await  axios.post("/api/users/signup",user);
+    console.log("signUp success",response.data);
+    router.push("/login")
+    }catch(err:any){
+      console.log("signup error",err.message)
+      toast.error(err.message)
+    }finally{
+      setLoading(false);
+    }
+  }
+  return (
+      <div className="border-2 shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]  top-[1rem]  rounded-lg relative md:top-[3rem] md:mt-1 md:w-[40rem] md:h-[30rem]  md:left-[20rem] w-[28rem] h-[30rem]">
+      <div className="text-2xl font-medium mb-20 text-center mt-20">
+        <h1>{loading ? "Processing" : "SignUp"}</h1>
+      <div className="flex flex-col p-2 space-y-4 w-[20rem] relative md:left-[11rem] left-[4rem] mt-10">
+        <input 
+        type="text" 
+        placeholder="Email" 
+        className="rounded-lg p-1 bg-inherit border border-white" 
+        value={user.email}
+        onChange={(e)=>setUser({...user,email:e.target.value})}
+        />
+
+        <input type="text" 
+        placeholder="Username" 
+        className="rounded-lg p-1 bg-inherit border border-white"
+        value={user.username}
+        onChange={(e)=>setUser({...user,username:e.target.value})}
+      
+        />
+      <input type="password" 
+      placeholder="Password" 
+      className="rounded-lg p-1 bg-inherit border border-white" 
+      value={user.password}
+      onChange={(e)=>setUser({...user,password:e.target.value})}
+      />
+      <button className="rounded-lg bg-blue-500 hover:bg-blue-700 duration-200" onClick={onSignUp}>{buttonDisabled ?"No signUp":"Sign Up"}</button>
+      <h1 className="text-lg">Have an Account?</h1><Link href="/login" className="text-lg underline text-blue-500" >Login Here</Link>
+      </div>
+      
+      </div>
+
+      </div>
+    
+  )
+}
+
+export default page
