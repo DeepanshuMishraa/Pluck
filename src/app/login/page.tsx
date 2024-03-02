@@ -1,47 +1,47 @@
 "use client";
-import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React, {useEffect} from "react";
-import toast from "react-hot-toast";
-
-
-const page = () => {
-
-  const router = useRouter();
-  const [buttonDisabled,setButtonDisabled] = React.useState(false)
-  const [loading,setLoading] = React.useState(false)
+import {useRouter} from "next/navigation";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 
 
-  const [user,setUser] = React.useState({
-    username: "",
-    password: "",
-   
-})
 
-  const onLogin = async()=>{
-    try{
-      setLoading(true);
-      const response = await axios.post("/api/users/login",user)
-      console.log("Login success",response.data);
-      toast.success("Login Success");
-      router.push(`/profile/${user.username}`)
-      
-    }catch(err:any){
-      console.log("Login Failed")
-      toast.error(err.message);
-    }finally{
-      setLoading(false);    }
-  }
 
-  useEffect(()=>{
-    if(user.username.length>0 && user.password.length>0){
-      setButtonDisabled(false);
-    }else{
-      setButtonDisabled(true);
+export default function LoginPage() {
+    const router = useRouter();
+    const [user, setUser] = React.useState({
+        username: "",
+        password: "",
+       
+    })
+    const [buttonDisabled, setButtonDisabled] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
+
+
+    const onLogin = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.post("/api/users/login", user);
+            console.log("Login success", response.data);
+            toast.success("Login success");
+            router.push("/profile");
+        } catch (error:any) {
+            console.log("Login failed", error.message);
+            toast.error(error.message);
+        } finally{
+        setLoading(false);
+        }
     }
-  },[user])
+
+    useEffect(() => {
+        if(user.username.length > 0 && user.password.length > 0) {
+            setButtonDisabled(false);
+        } else{
+            setButtonDisabled(true);
+        }
+    }, [user]);
 
   return (
 
@@ -76,4 +76,4 @@ const page = () => {
   )
 }
 
-export default page
+
