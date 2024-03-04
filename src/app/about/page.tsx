@@ -2,11 +2,14 @@ import { ThreeDCardDemo } from "./card"
 import { Hcard } from "./Hcard"
 import {Scard} from './Scard'
 import Link from "next/link"
+import { Suspense } from 'react'
+
 
 
 const About = () => {
   return (
     <div className="font-extralight text-center">
+        
         <h1 className="text-4xl mt-8 p-2 underline ">About</h1>
         <div className="py-4 text-xl space-y-4 px-2">
             <p>Welcome to Pluck - Your Ultimate Marketplace for Convenience and Quality!</p>
@@ -29,6 +32,7 @@ const About = () => {
 
             </div>
         </div>
+        
     </div>
   )
 }

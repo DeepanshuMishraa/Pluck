@@ -9,7 +9,7 @@ const Navbar = () => {
     const [nav,setNav] = React.useState(false);
 
   return (
-    <div className="md:w-[26.5rem] bg-inherit h-16 flex relative md:left-[27rem] md:p-2 md:mt-1 rounded-full md:text-white md:space-x-4 p-2 border-2 shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] mt-4 w-[22.5rem] left-[4rem]  ">
+    <div className="md:w-[26.5rem] bg-inherit h-16 flex relative md:left-[27rem] md:p-2 md:mt-1 rounded-full md:text-white md:space-x-4 p-2 border-2 shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] mt-4 w-[22.5rem] left-[1rem]  ">
         <Link href="/" className="p-3  rounded-full hover:scale-110 duration-200">Home</Link>
         <Link href="/shop" className="p-3  rounded-full hover:scale-110 duration-200">Shop</Link>
         <Link href="/about" className="p-3   rounded-full hover:scale-110 duration-200">About</Link>
