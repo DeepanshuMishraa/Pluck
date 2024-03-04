@@ -1,5 +1,3 @@
-/* eslint react/no-unescaped-entities */
-
 import { ThreeDCardDemo } from "./card"
 import { Hcard } from "./Hcard"
 import {Scard} from './Scard'
