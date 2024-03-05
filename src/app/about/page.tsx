@@ -25,8 +25,6 @@ const About = () => {
             <h1 className="font-mono mt-10">Meet The Team</h1>
             <div className="grid sm:grid-cols-2">
                 <ThreeDCardDemo />
-                <Scard/>
-                <div className="relative md:left-[18rem] ">
                 <Hcard/>
                 </div>
 
