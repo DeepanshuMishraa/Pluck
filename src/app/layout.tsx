@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Inter, Rubik,Manrope } from '@next/font/google';
 import NextTopLoader from 'nextjs-toploader';
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,7 @@ export default function RootLayout({
       <body className={`bg-black font-bold text-gray-200 ${manrope.className}`}>
       <NextTopLoader speed={200} color="#ff0000"/>
         {children}
-        
+        <Footer/>
       </body>
     </html>
   );

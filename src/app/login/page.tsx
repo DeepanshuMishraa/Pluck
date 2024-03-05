@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation"; // Changed from "next/navigation"
 import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
+import Footer from "@/components/footer";
 
 export default function LoginPage() {
     const router = useRouter();
@@ -39,7 +40,7 @@ export default function LoginPage() {
     }, [user]);
 
     return (
-        <div className="border-2 shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] mt-3 top-[1rem] rounded-lg relative md:top-[3rem] md:w-[40rem]  md:left-[20rem] w-[28rem]  h-[30rem]">
+        <div className="border-2 shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] mt-3 top-[1rem] rounded-lg relative md:top-[3rem] md:w-[40rem]  md:left-[20rem] w-[28rem]  h-[30rem] ">
             <div className="text-2xl font-medium mb-20 text-center mt-20">
                 <h1>{loading ? "Processing" : "Login"}</h1>
                 <div className="flex flex-col p-2 space-y-4 w-[20rem] relative md:left-[11rem] left-[4rem] mt-10">
@@ -64,6 +65,7 @@ export default function LoginPage() {
                 </div>
             </div>
             <Toaster position="bottom-center" /> {/* Toaster component rendered once at the top level */}
+
         </div>
     );
 }
