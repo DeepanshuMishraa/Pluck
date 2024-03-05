@@ -26,7 +26,6 @@ const About = () => {
             <div className="grid sm:grid-cols-2">
                 <ThreeDCardDemo />
                 <Hcard/>
-                </div>
 
             </div>
         </div>
