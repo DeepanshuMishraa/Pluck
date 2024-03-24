@@ -21,7 +21,7 @@ export function Scard() {
           translateZ="60"
           className="text-white text-sm max-w-sm mt-2 "
         >
-          Jr. Developer | Marketing Head
+          Social Media Manager
         </CardItem>
         <CardItem translateZ="100" className="w-full mt-4">
           <Image

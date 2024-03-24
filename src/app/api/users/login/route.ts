@@ -37,15 +37,16 @@ export async function POST(request: NextRequest) {
       expiresIn: "1d",
     });
 
-    const response = NextResponse.json({
-      message: "Login Success",
-      success: true,
-    });
+    const response = NextResponse.json(
+      {
+        message: "Login Success",
+        success: true,
+      },
+      { status: 200 }
+    );
 
-    
-
-    response.cookies.set("token", token,{ httpOnly: true });
-    return response
+    response.cookies.set("token", token, { httpOnly: true });
+    return response;
   } catch (err: any) {
     return NextResponse.json({ err: err.message }, { status: 500 });
   }
